@@ -1,0 +1,9 @@
+{
+  "lastResetAt": 1790170033213,
+  "updatedAt": {
+    "type": "firestore/timestamp/1.0",
+    "seconds": 1790176286,
+    "nanoseconds": 945000000
+  },
+  "statsMap": {}
+}

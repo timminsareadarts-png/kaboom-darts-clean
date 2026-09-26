@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "Match": {
+      "title": "Match",
+      "description": "Live and completed dart match records for venue scoring",
+      "type": "object",
+      "properties": {
+        "matchCode": { "type": "string", "maxLength": 64 },
+        "status": { "type": "string", "enum": ["active", "completed"] },
+        "matchState": { "type": "object" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["matchCode", "status", "matchState"]
+    },
+    "LeagueStandings": {
+      "title": "LeagueStandings",
+      "description": "Standings table for a specific league format",
+      "type": "object",
+      "properties": {
+        "leagueType": { "type": "string", "enum": ["tuesday", "wednesday", "thursday"] },
+        "standings": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["leagueType", "standings"]
+    },
+    "LeagueFinances": {
+      "title": "LeagueFinances",
+      "description": "Financial ledger documents including player dues and nightly session records",
+      "type": "object",
+      "properties": {
+        "leagueType": { "type": "string" },
+        "players": { "type": "array" },
+        "sessions": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "LeagueRoster": {
+      "title": "LeagueRoster",
+      "description": "Master registered player roster across all leagues",
+      "type": "object",
+      "properties": {
+        "players": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["players"]
+    },
+    "SeasonBulls": {
+      "title": "SeasonBulls",
+      "description": "Cumulative season bulls tracker for all league players",
+      "type": "object",
+      "properties": {
+        "seasonBullsMap": { "type": "object" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["seasonBullsMap"]
+    },
+    "LeagueBrackets": {
+      "title": "LeagueBrackets",
+      "description": "Interactive tournament and round brackets",
+      "type": "object",
+      "properties": {
+        "leagueType": { "type": "string" },
+        "brackets": { "type": "object" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["leagueType", "brackets"]
+    }
+  },
+  "firestore": {
+    "/matches/{matchId}": {
+      "schema": "Match",
+      "description": "Real-time match scoring and state documents"
+    },
+    "/league_standings/{leagueType}": {
+      "schema": "LeagueStandings",
+      "description": "Live standings for Tuesday, Wednesday, and Thursday leagues"
+    },
+    "/league_finances/{docId}": {
+      "schema": "LeagueFinances",
+      "description": "Financial records, membership deposits, and nightly fees"
+    },
+    "/league_roster/{rosterId}": {
+      "schema": "LeagueRoster",
+      "description": "Master player profiles and contact references"
+    },
+    "/season_bulls/{bullsId}": {
+      "schema": "SeasonBulls",
+      "description": "Live season bull counts"
+    },
+    "/league_brackets/{bracketId}": {
+      "schema": "LeagueBrackets",
+      "description": "Bracket progression across league divisions"
+    }
+  }
+}
